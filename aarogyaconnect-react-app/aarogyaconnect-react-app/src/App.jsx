@@ -19,6 +19,7 @@ import { INITIAL_INSURERS } from './data/insurers.js';
 import { INITIAL_REVIEWS } from './data/reviews.js';
 import { STATIC_TRANSLATIONS, TRANSLATIONS } from './data/translations.js';
 const AmbulanceRouteMap = lazy(() => import('./components/AmbulanceRouteMap.jsx'));
+import PersonnelWellness from './components/PersonnelWellness.jsx';
 
 // ==========================================
 // 1. BACKEND SERVICE & PERSISTENCE ENGINE
@@ -1089,6 +1090,14 @@ export default function App() {
               <AlertTriangle className="w-3.5 h-3.5" />
               <span>SOS 108</span>
             </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab('personnel-wellness')}
+              className="bg-teal-500/15 hover:bg-teal-500/25 text-teal-200 border border-teal-500/30 font-bold text-xs px-3 py-2.5 rounded-xl flex items-center gap-1.5"
+            >
+              <Shield className="w-3.5 h-3.5" />
+              <span>Personnel Wellness</span>
+            </button>
           </div>
 
           <button
@@ -1129,6 +1138,17 @@ export default function App() {
               </div>
 
               <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setActiveTab('personnel-wellness');
+                  }}
+                  className="bg-teal-500/15 hover:bg-teal-500/25 text-teal-200 border border-teal-500/30 font-bold text-xs px-3 py-2.5 rounded-xl flex items-center gap-1.5"
+                >
+                  <Shield className="w-3.5 h-3.5" />
+                  <span>Personnel Wellness</span>
+                </button>
                 <button
                   type="button"
                   onClick={() => {
@@ -1393,6 +1413,13 @@ export default function App() {
                     desc: "Book confirmed OPD appointments or initiate live video consultation with e-prescription.",
                     tab: "doctors",
                     color: "emerald"
+                  },
+                  {
+                    icon: Shield,
+                    title: "Personnel Stress & Welfare",
+                    desc: "Voluntary wellbeing check-ins, explainable stress estimates, private support, and aggregate welfare insights.",
+                    tab: "personnel-wellness",
+                    color: "teal"
                   }
                 ].map((mod, idx) => {
                   const Icon = mod.icon;
@@ -4212,6 +4239,10 @@ export default function App() {
           </div>
         )}
 
+        {activeTab === 'personnel-wellness' && (
+          <PersonnelWellness onClose={() => setActiveTab('landing')} />
+        )}
+
       </main>
 
       {/* =============================================================
@@ -4911,6 +4942,7 @@ export default function App() {
             <button onClick={() => setActiveTab('schemes')} className="hover:text-emerald-400">PM-JAY & MJPJAY</button>
             <button onClick={() => setActiveTab('cost')} className="hover:text-emerald-400">Cost Calculator</button>
             <button onClick={() => setActiveTab('admin')} className="hover:text-cyan-400">Admin Control</button>
+            <button onClick={() => setActiveTab('personnel-wellness')} className="hover:text-teal-300">Personnel Wellness</button>
           </div>
 
           <p className="font-semibold text-slate-400 max-w-2xl mx-auto">
